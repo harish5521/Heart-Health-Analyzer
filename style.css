@@ -1,0 +1,344 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-image: url('./background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s, color 0.3s, filter 0.3s;
+    min-height: 100vh;
+    background: transparent;
+    filter: brightness(1.2); /* Default brightness for light mode */
+}
+
+body.light-mode {
+    background-color: transparent;
+    color: #212529;
+    filter: brightness(1.2); /* Increased brightness for light mode */
+}
+
+body.dark-mode {
+    background-color: transparent;
+    color: #f8f9fa;
+    filter: brightness(0.8); /* Decreased brightness for dark mode */
+}
+
+/* Card Styles */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .card {
+    background-color: rgba(44, 48, 52, 0.9);
+    border-color: #495057;
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0 !important;
+    background-color: #0d6efd;
+    color: white;
+}
+
+.card-header h4, .card-header h6 {
+    margin: 0;
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+    background-color: #007c40;
+    border-color: #12c72a;
+}
+
+/* Navbar Styles */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    background-color: #0d6efd;
+}
+
+body.dark-mode .navbar {
+    background-color: #343a40;
+}
+
+/* Theme Toggle Button */
+#themeToggle {
+    transition: all 0.3s ease;
+}
+
+body.dark-mode #themeToggle {
+    background-color: #495057;
+    border-color: #6c757d;
+    color: #f8f9fa;
+}
+
+body.dark-mode #themeToggle:hover {
+    background-color: #6c757d;
+}
+
+/* Form Styles */
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-select,
+body.dark-mode .form-check-input:not(:checked) {
+    background-color: #343a40;
+    border-color: #495057;
+    color: #f8f9fa;
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus {
+    background-color: #343a40;
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    color: #f8f9fa;
+}
+
+body.dark-mode .form-label,
+body.dark-mode .form-check-label {
+    color: #e9ecef;
+}
+
+body.dark-mode .form-control::placeholder {
+    color: #adb5bd;
+}
+
+/* Modal Styles */
+body.dark-mode .modal-content {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+    border-color: #495057;
+    background-color: #343a40;
+}
+
+body.dark-mode .modal-title {
+    color: #ffffff;
+}
+
+body.dark-mode .btn-close {
+    filter: invert(1);
+}
+
+/* Update Profile Modal Styles */
+#updateProfileModal .modal-content {
+    border-radius: 10px;
+}
+
+#updateProfileModal .modal-header {
+    background-color: #0d6efd;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* Health Analysis Results Styles */
+body.dark-mode #resultsCard p {
+    color: #ffff00; /* Yellow color for visibility in dark mode */
+}
+
+/* Toast Notification Styles */
+.toast {
+    border-radius: 8px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+#updateSuccessToast .toast-header,
+#errorToast .toast-header {
+    border-bottom: none;
+}
+
+#updateSuccessToast .toast-body,
+#errorToast .toast-body {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+body.dark-mode #updateSuccessToast .toast-body,
+body.dark-mode #errorToast .toast-body {
+    background-color: #2c3034;
+    color: #f8f9fa;
+}
+
+/* Risk Level Styles */
+.risk-high {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.risk-medium {
+    color: #fd7e14;
+    font-weight: bold;
+}
+
+.risk-low {
+    color: #198754;
+    font-weight: bold;
+}
+
+.risk-info {
+    color: #0dcaf0;
+    font-weight: bold;
+}
+
+.list-group-item.risk-high {
+    border-left: 4px solid #dc3545;
+}
+
+.list-group-item.risk-medium {
+    border-left: 4px solid #fd7e14;
+}
+
+.list-group-item.risk-low {
+    border-left: 4px solid #198754;
+}
+
+.list-group-item.risk-info {
+    border-left: 4px solid #0dcaf0;
+}
+
+/* History Modal Styles */
+#historyModal .list-group-item {
+    transition: all 0.3s ease;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+body.dark-mode #historyModal .list-group-item {
+    background-color: #343a40;
+    border-color: #495057;
+}
+
+#historyModal .list-group-item h5 {
+    font-weight: bold;
+}
+
+#historyModal .list-group-item small {
+    color: #6c757d;
+}
+
+body.dark-mode #historyModal .list-group-item small {
+    color: #adb5bd;
+}
+
+/* Chart Styles */
+#healthTrendChart {
+    width: 100% !important;
+    height: 500px !important;
+}
+
+/* Clear Buttons */
+.clear-entry-btn {
+    padding: 0.15rem 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    margin-left: 0.5rem;
+}
+
+#clearAllHistoryBtn {
+    font-weight: 500;
+}
+
+/* Animations */
+.container {
+    animation: fadeIn 1.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+    animation: cardAppear 0.8s ease-out both;
+    animation-delay: calc(var(--order) * 0.1s);
+}
+
+@keyframes cardAppear {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.background-pulse {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    pointer-events: none;
+    display: none;
+}
+
+.heartbeat-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(246, 0, 0, 0.1);
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    animation: heartbeat 2s ease-out;
+}
+
+@keyframes heartbeat {
+    0% { opacity: 0; transform: scale(1); }
+    25% { opacity: 0.3; transform: scale(1.05); }
+    35% { opacity: 0; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(1.05); }
+    60% { opacity: 0; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+}
+
+body.dark-mode .heartbeat-animation {
+    background-color: rgba(255, 50, 50, 0.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container {
+        animation: fadeInMobile 1s ease-out;
+    }
+
+    @keyframes fadeInMobile {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    #historyModal .table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+.card-bodyd {
+    color: #ffaa00;
+
+}

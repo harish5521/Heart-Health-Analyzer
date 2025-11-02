@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Allow authenticated users to read, write, and delete their own health history
+    match /healthHistory/{document=**} {
+      allow read: if request.auth.uid != null && resource.data.userId == request.auth.uid;
+      allow create: if request.auth.uid != null && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if request.auth.uid != null && resource.data.userId == request.auth.uid;
+    }
+    
+    // Allow authenticated users to manage their own user data
+    match /users/{userId} {
+      allow read: if request.auth.uid != null;
+      allow create, update, delete: if request.auth.uid == userId;
+    }
+  }
+}

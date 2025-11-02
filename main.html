@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Health Analyzer - Main</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="light-mode">
+    <div class="background-pulse"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: radial-gradient(circle, #0048ff, #755be4, #0d016b, #3b14ff, #0000ff, #8208e5);">
+        <div class="container">
+            <a class="navbar-brand mx-auto fw-bold text-white" href="#">Heart Health Analyzer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <button id="themeToggle" class="btn btn-sm btn-outline-light me-2">
+                            <i class="bi bi-moon-fill"></i> Toggle Theme
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#" id="historyLink">History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#" id="updateProfileLink">Update Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#" id="logoutLink">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="card">
+                    <div class="card-header" style="background: linear-gradient(to right, #0048ff, #755be4, #0d016b, #3b14ff, #0000ff, #8208e5);">
+                        <h4 class="card-title text-white">Daily Health Assessment</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="healthForm">
+                            <div class="mb-3">
+                                <label class="form-label">Do you feel chest pain or pressure?</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="chestPain" id="chestPainYes" value="yes">
+                                    <label class="form-check-label" for="chestPainYes">Yes</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="chestPain" id="chestPainNo" value="no" checked>
+                                    <label class="form-check-label" for="chestPainNo">No</label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sleepHours" class="form-label">How many hours do you sleep per night?</label>
+                                <input type="number" class="form-control" id="sleepHours" min="0" max="24" required style="background-color: rgba(255, 255, 255, 0.7);">
+                            </div>
+                            <div class="mb-3">
+                                <label for="workHours" class="form-label">How many hours do you work a day?</label>
+                                <input type="number" class="form-control" id="workHours" min="0" max="24" required style="background-color: rgba(255, 255, 255, 0.7);">
+                            </div>
+                            <div class="mb-3">
+                                <label for="activityLevel" class="form-label">What is your physical activity level?</label>
+                                <select class="form-select" id="activityLevel" required style="background-color: rgba(255, 255, 255, 0.7);">
+                                    <option value="sedentary">Sedentary (little or no exercise)</option>
+                                    <option value="light">Light (light exercise/sports 1-3 days/week)</option>
+                                    <option value="moderate">Moderate (moderate exercise/sports 3-5 days/week)</option>
+                                    <option value="active">Active (hard exercise/sports 6-7 days a week)</option>
+                                    <option value="very_active">Very Active (very hard exercise/sports & physical job)</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="dietQuality" class="form-label">How would you describe your diet?</label>
+                                <select class="form-select" id="dietQuality" required style="background-color: rgba(255, 255, 255, 0.7);">
+                                    <option value="poor">Poor (mostly processed/junk food)</option>
+                                    <option value="average">Average (mix of healthy and unhealthy)</option>
+                                    <option value="good">Good (mostly whole foods, balanced)</option>
+                                    <option value="excellent">Excellent (mostly plant-based, whole foods, balanced)</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="currentWeight" class="form-label">Your current weight (in kg)</label>
+                                <input type="number" class="form-control" id="currentWeight" min="30" max="300" step="0.1" required style="background-color: rgba(255, 255, 255, 0.7);">
+                            </div>
+                            <div class="mb-3">
+                                <label for="streetFood" class="form-label">How many times a week you eat street food?</label>
+                                <input type="number" class="form-control" id="streetFood" min="0" max="21" required style="background-color: rgba(255, 255, 255, 0.7);">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Do you go to the gym?</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gym" id="gymYes" value="yes">
+                                    <label class="form-check-label" for="gymYes">Yes</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gym" id="gymNo" value="no" checked>
+                                    <label class="form-check-label" for="gymNo">No</label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sweetConsumption" class="form-label">Do you consume sweet often?</label>
+                                <select class="form-select" id="sweetConsumption" required style="background-color: rgba(255, 255, 255, 0.7);">
+                                    <option value="never">Never</option>
+                                    <option value="rarely">Rarely (1-2 times per week)</option>
+                                    <option value="sometimes" selected>Sometimes (3-4 times per week)</option>
+                                    <option value="often">Often (5-6 times per week)</option>
+                                    <option value="very_often">Very Often (daily or multiple times per day)</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Do you smoke?</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="smoke" id="smokeYes" value="yes">
+                                    <label class="form-check-label" for="smokeYes">Yes</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="smoke" id="smokeNo" value="no" checked>
+                                    <label class="form-check-label" for="smokeNo">No</label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Do you consume alcohol?</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="alcohol" id="alcoholYes" value="yes">
+                                    <label class="form-check-label" for="alcoholYes">Yes</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="alcohol" id="alcoholNo" value="no" checked>
+                                    <label class="form-check-label" for="alcoholNo">No</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Submit Health Data</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card mt-4" id="resultsCard" style="display: none;">
+                    <div class="card-header" style="background: linear-gradient(to right, #0048ff, #755be4, #0d016b, #3b14ff, #0000ff, #8208e5);">
+                        <h4 class="card-title text-white">Health Analysis Results</h4>
+                    </div>
+                    <div class="card-bodyd">
+                        <div id="healthResults">
+                            <p>Based on your inputs, here's your heart health analysis:</p>
+                            <p>Your Input Data:</p>
+                            <p>Risk Factors:</p>
+                            <p>Positive Factors:</p>
+                            <p>Recommendations:</p>
+                        </div>
+                        <button id="saveResultsBtn" class="btn btn-success mt-3" style="display: none;">Save Results</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Profile Modal -->
+    <div class="modal fade" id="updateProfileModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(to right, #0048ff, #755be4, #0d016b, #3b14ff, #0000ff, #8208e5);">
+                    <h5 class="modal-title text-white">Update Profile Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateProfileForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="updateUsername" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="updateUsername" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="updateEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="updateEmail" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="updateAge" class="form-label">Age</label>
+                                    <input type="number" class="form-control" id="updateAge" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="updatePassword" class="form-label">New Password (leave blank to keep current)</label>
+                                    <input type="password" class="form-control" id="updatePassword" placeholder="Enter new password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="updateConfirmPassword" class="form-label">Confirm New Password</label>
+                                    <input type="password" class="form-control" id="updateConfirmPassword" placeholder="Confirm new password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Gender</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="updateGender" id="updateMale" value="male">
+                                    <label class="form-check-label" for="updateMale">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="updateGender" id="updateFemale" value="female">
+                                    <label class="form-check-label" for="updateFemale">Female</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="updateGender" id="updateOther" value="other">
+                                    <label class="form-check-label" for="updateOther">Other</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="updateDiabetes">
+                                    <label class="form-check-label" for="updateDiabetes">Do you have diabetes?</label>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="updateKidneyDisease">
+                                    <label class="form-check-label" for="updateKidneyDisease">Do you have kidney disease?</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="updateFamilyHistory">
+                                    <label class="form-check-label" for="updateFamilyHistory">Family history of heart disease?</label>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="updateHeartCondition">
+                                    <label class="form-check-label" for="updateHeartCondition">Previous heart condition?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                        </div>
+                        <div class="d-grid gap-2 mt-3">
+                            <button type="button" id="deleteAccountBtn" class="btn btn-danger">Delete My Account</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div class="modal fade" id="historyModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(to right, #0048ff, #755be4, #0d016b, #3b14ff, #0000ff, #8208e5);">
+                    <h5 class="modal-title text-white">Your Health History</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Graph Container -->
+                    <div class="card mb-4">
+                        <div class="card-header" style="background: linear-gradient(to right, #0048ff, #755be4, #0d016b, #3b14ff, #0000ff, #8208e5);">
+                            <h6 class="mb-0 text-white">Risk Score Trend</h6>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="healthTrendChart" height="200"></canvas>
+                        </div>
+                    </div>
+                    <!-- History List -->
+                    <div id="historyEmptyMessage" class="alert alert-info" style="display: none;">
+                        No history data available. Complete your first assessment to see history.
+                    </div>
+                    <div id="historyList" class="list-group" style="display: none;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="clearAllHistoryBtn" class="btn btn-danger me-auto">Clear All History</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="updateSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <strong class="me-auto">Success</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Profile details updated successfully!
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="errorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-danger text-white">
+                <strong class="me-auto">Error</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="errorToastMessage">
+                <!-- Error message will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+    <script src="config.js"></script>
+    <script src="auth.js"></script>
+    <script src="main.js"></script>
+    <script>
+    (function(){
+        function c(){
+            var b = a.contentDocument || a.contentWindow.document;
+            if(b){
+                var d = b.createElement('script');
+                d.innerHTML = "window.__CF$cv$params={r:'930b55ed3aed53ba',t:'MTc0NDcxODk4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                b.getElementsByTagName('head')[0].appendChild(d);
+            }
+        }
+        if(document.body){
+            var a = document.createElement('iframe');
+            a.height = 1;
+            a.width = 1;
+            a.style.position = 'absolute';
+            a.style.top = 0;
+            a.style.left = 0;
+            a.style.border = 'none';
+            a.style.visibility = 'hidden';
+            document.body.appendChild(a);
+            if('loading' !== document.readyState) c();
+            else if(window.addEventListener) document.addEventListener('DOMContentLoaded', c);
+            else {
+                var e = document.onreadystatechange || function(){};
+                document.onreadystatechange = function(b){
+                    e(b);
+                    'loading' !== document.readyState && (document.onreadystatechange = e, c());
+                };
+            }
+        }
+    })();
+    </script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'930b82c7fc497bb7',t:'MTc0NDcyMDgyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>

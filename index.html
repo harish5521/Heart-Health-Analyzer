@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Heart Health Analyzer - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* About Section Styling */
+        #about-container {
+            margin-top: 2rem;
+        }
+
+        #about-box {
+            background-color: rgba(255, 255, 255, 0.7); /* Reduced whiteness */
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        #about-box h2 {
+            color: #0d6efd;
+            margin-bottom: 1rem;
+        }
+
+        #about-box p {
+            color: #212529;
+            line-height: 1.6;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode #about-box {
+            background-color: rgba(44, 48, 52, 0.9);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode #about-box h2 {
+            color: #86b7fe;
+        }
+
+        body.dark-mode #about-box p {
+            color: #e9ecef;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <div class="background-pulse"></div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card mt-5">
+                    <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(to right, #0048ff, #755be4, #0d016b, #3b14ff, #0000ff, #8208e5); border-radius: 10px 10px 0 0;">
+                        <div class="container justify-content-between">
+                            <a class="navbar-brand fw-bold text-white" href="#">Heart Health Analyzer</a>
+                            <button id="themeToggle" class="btn btn-sm btn-outline-light ms-2 p-2" title="Toggle Theme">
+                                <i class="bi bi-moon-fill" id="themeIcon"></i>
+                                <span class="toggle-text visually-hidden">Toggle Theme</span>
+                            </button>
+                        </div>
+                    </nav>
+                    <div class="card-body">
+                        <form  id="loginForm">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" placeholder="enter your username" id="username" required 
+                                       autocomplete="new-username" readonly
+                                       onfocus="this.removeAttribute('readonly')" style="background-color: rgba(255, 255, 255, 0.7);">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" placeholder="enter password" id="password" required 
+                                       autocomplete="new-password" readonly
+                                       onfocus="this.removeAttribute('readonly')" style="background-color: rgba(255, 255, 255, 0.7);">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
+                            <div class="d-flex justify-content-between">
+                                <a href="#" id="forgotPasswordLink" class="small" style="font-weight: 600; color: #47a0ff;">Forgot Password?</a>
+                                <a href="#" id="createAccountLink" class="small" style="font-weight: 600; color: #00ff2f;">Create Account</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div id="about-box" class="card">
+                    <div class="card-body">
+                        <section id="about">
+                            <h2 class="card-title">About Heart Health Analyzer</h2>
+                            <p class="card-text">
+                                Heart Health Analyzer is a web-based platform designed to help individuals to monitor their Heart Health.
+                                By analyzing user-provided data, 
+                                the system determines if a person's heart is at risk or in a safe state. 
+                                The website also 
+                                aiming to promote awareness and early detection of heart health issues for better preventative care.
+                            </p>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Forgot Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="forgotPasswordForm">
+                        <div class="mb-3">
+                            <label for="forgotEmail" class="form-label">Enter your Registered email</label>
+                            <input type="email" placeholder="Enter email" class="form-control" id="forgotEmail" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Reset Link</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Account Modal -->
+    <div class="modal fade" id="createAccountModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="mb-3">
+                            <label for="regUsername" class="form-label">Username</label>
+                            <input type="text" placeholder="Enter New user name" class="form-control" id="regUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="regEmail" class="form-label">Email</label>
+                            <input type="email" placeholder="Enter New Email" class="form-control" id="regEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="regPassword" class="form-label">Password</label>
+                            <input type="password" placeholder="Enter new password" class="form-control" id="regPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="regConfirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" placeholder="Confirm your password" class="form-control" id="regConfirmPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="regAge" class="form-label">Age</label>
+                            <input type="number" placeholder="Enter your age" class="form-control" id="regAge" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Gender</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="regGender" id="regMale" value="male" checked>
+                                    <label class="form-check-label" for="regMale">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="regGender" id="regFemale" value="female">
+                                    <label class="form-check-label" for="regFemale">Female</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="regGender" id="regOther" value="other">
+                                    <label class="form-check-label" for="regOther">Other</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="regDiabetes">
+                            <label class="form-check-label" for="regDiabetes">Do you have diabetes?</label>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="regKidneyDisease">
+                            <label class="form-check-label" for="regKidneyDisease">Do you have kidney disease?</label>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="regFamilyHistory">
+                            <label class="form-check-label" for="regFamilyHistory">Do you have a family history of heart disease?</label>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="regHeartCondition">
+                            <label class="form-check-label" for="regHeartCondition">Have you ever been diagnosed with any heart condition before?</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+    <script src="config.js"></script>
+    <script src="auth.js"></script>
+    <script>
+    (function(){
+        function c(){
+            var b = a.contentDocument || a.contentWindow.document;
+            if(b){
+                var d = b.createElement('script');
+                d.innerHTML = "window.__CF$cv$params={r:'930b554d1c12674c',t:'MTc0NDcxODk1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                b.getElementsByTagName('head')[0].appendChild(d);
+            }
+        }
+        if(document.body){
+            var a = document.createElement('iframe');
+            a.height = 1;
+            a.width = 1;
+            a.style.position = 'absolute';
+            a.style.top = 0;
+            a.style.left = 0;
+            a.style.border = 'none';
+            a.style.visibility = 'hidden';
+            document.body.appendChild(a);
+            if('loading' !== document.readyState) c();
+            else if(window.addEventListener) document.addEventListener('DOMContentLoaded', c);
+            else {
+                var e = document.onreadystatechange || function(){};
+                document.onreadystatechange = function(b){
+                    e(b);
+                    'loading' !== document.readyState && (document.onreadystatechange = e, c());
+                };
+            }
+        }
+    })();
+    </script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'930b828a0f0f53f7',t:'MTc0NDcyMDgxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>
